@@ -60,7 +60,7 @@ export default function ControlsPanel({
   activeScenario,
 }) {
   return (
-    <aside className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/50">
+    <aside className="flex h-full min-h-[560px] flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/50 lg:min-h-full">
       <div className="mb-6">
         <h2 className="text-sm font-semibold text-slate-900">Analysis Controls</h2>
         <p className="mt-1 text-xs text-slate-500">
@@ -148,6 +148,8 @@ export default function ControlsPanel({
           {SAMPLE_SCENARIOS[activeScenario]?.label}
         </div>
       )}
+
+      <div className="flex-1" aria-hidden="true" />
     </aside>
   );
 }

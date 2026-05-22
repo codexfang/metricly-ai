@@ -1,1 +1,0 @@
-AI-powered analytics dashboard for business intelligence — trends, predictions, performance scores, risk insights, and interactive charts. Built with React.

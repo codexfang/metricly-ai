@@ -7,6 +7,7 @@ import InsightPanel from './components/InsightPanel';
 import ChartsSection from './components/ChartsSection';
 import CompareView from './components/CompareView';
 import SampleScenarioModal from './components/SampleScenarioModal';
+import DashboardEmptyState from './components/DashboardEmptyState';
 import {
   analyzeMetrics,
   saveAnalysisToStorage,
@@ -33,6 +34,8 @@ export default function App() {
   const [compareMode, setCompareMode] = useState(false);
   const [analysisA, setAnalysisA] = useState(null);
   const [analysisB, setAnalysisB] = useState(null);
+  const [generatedA, setGeneratedA] = useState(false);
+  const [generatedB, setGeneratedB] = useState(false);
   const [animateKey, setAnimateKey] = useState(0);
   const [scenarioModalOpen, setScenarioModalOpen] = useState(false);
   const [activeScenario, setActiveScenario] = useState(null);
@@ -46,22 +49,6 @@ export default function App() {
     setHasStoredAnalysis(!!loadAnalysisFromStorage());
   }, []);
 
-  useEffect(() => {
-    const result = analyzeMetrics(metricsData, filtersA);
-    setAnalysisA(result);
-    if (!compareMode) {
-      saveAnalysisToStorage(result, filtersA);
-      setHasStoredAnalysis(true);
-    }
-    setAnimateKey((k) => k + 1);
-  }, [filtersA, compareMode]);
-
-  useEffect(() => {
-    if (!compareMode) return;
-    const result = analyzeMetrics(metricsData, filtersB);
-    setAnalysisB(result);
-  }, [filtersB, compareMode]);
-
   const showToast = (message) => {
     setToast(message);
     setTimeout(() => setToast(null), 2800);
@@ -72,30 +59,30 @@ export default function App() {
     setActiveScenario(null);
   };
 
-  const runAnalysis = useCallback(
-    (filters, setter) => {
-      const result = analyzeMetrics(metricsData, filters);
-      setter(result);
-      return result;
-    },
-    []
-  );
+  const runAnalysis = useCallback((filters, setter) => {
+    const result = analyzeMetrics(metricsData, filters);
+    setter(result);
+    return result;
+  }, []);
 
   const handleGenerate = () => {
     if (compareMode) {
       if (compareSide === 'A') {
         const result = runAnalysis(filtersA, setAnalysisA);
+        setGeneratedA(true);
         saveAnalysisToStorage(result, filtersA);
         showToast('Dataset A insights generated');
       } else {
         const result = runAnalysis(filtersB, setAnalysisB);
+        setGeneratedB(true);
         showToast('Dataset B insights generated');
       }
     } else {
       const result = runAnalysis(filtersA, setAnalysisA);
+      setGeneratedA(true);
       saveAnalysisToStorage(result, filtersA);
       setHasStoredAnalysis(true);
-      showToast('Insights updated successfully');
+      showToast('Insights generated successfully');
     }
     setAnimateKey((k) => k + 1);
   };
@@ -111,6 +98,7 @@ export default function App() {
 
     const result = analyzeMetrics(metricsData, newFilters);
     setAnalysisA(result);
+    setGeneratedA(true);
     saveAnalysisToStorage(result, newFilters);
     setHasStoredAnalysis(true);
     setAnimateKey((k) => k + 1);
@@ -122,16 +110,26 @@ export default function App() {
     if (!stored) return;
     setFiltersA(stored.filters ?? DEFAULT_FILTERS);
     setAnalysisA(stored.analysis);
+    setGeneratedA(true);
     setActiveScenario(null);
     setAnimateKey((k) => k + 1);
     showToast('Last analysis restored');
   };
 
   const handleToggleCompare = () => {
-    setCompareMode((prev) => !prev);
+    setCompareMode((prev) => {
+      if (prev) {
+        setGeneratedB(false);
+        setAnalysisB(null);
+      }
+      return !prev;
+    });
   };
 
-  const mainAnalysis = analysisA;
+  const showEmptyState = compareMode
+    ? !generatedA && !generatedB
+    : !generatedA;
+  const showMainDashboard = !compareMode && generatedA && analysisA;
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -144,7 +142,7 @@ export default function App() {
       )}
 
       <main className="mx-auto max-w-[1600px] px-4 py-6 sm:px-6 lg:px-8">
-        <div className="grid gap-6 lg:grid-cols-[320px_1fr]">
+        <div className="grid gap-6 lg:grid-cols-[320px_1fr] lg:items-stretch">
           <ControlsPanel
             filters={activeFilters}
             onFilterChange={handleFilterChange}
@@ -159,26 +157,34 @@ export default function App() {
             activeScenario={activeScenario}
           />
 
-          <div className="space-y-6">
-            {compareMode ? (
-              <>
-                <CompareView analysisA={analysisA} analysisB={analysisB} />
-                <ChartsSection analysis={analysisA} />
-              </>
+          <div className="flex h-full min-h-[560px] flex-col">
+            {showEmptyState ? (
+              <DashboardEmptyState compareMode={compareMode} />
+            ) : compareMode ? (
+              <div className="flex h-full flex-col space-y-6">
+                <CompareView
+                  analysisA={generatedA ? analysisA : null}
+                  analysisB={generatedB ? analysisB : null}
+                />
+                {generatedA && <ChartsSection analysis={analysisA} />}
+              </div>
             ) : (
-              <>
-                <OverviewCards analysis={mainAnalysis} animateKey={animateKey} />
-                <InsightPanel analysis={mainAnalysis} />
-                <ChartsSection analysis={mainAnalysis} />
-              </>
-            )}
-
-            {mainAnalysis?.meta && (
-              <p className="text-center text-xs text-slate-400">
-                Analysis based on {mainAnalysis.meta.recordCount} metric
-                {mainAnalysis.meta.recordCount !== 1 ? 's' : ''} ·{' '}
-                {mainAnalysis.meta.timeRange?.toUpperCase()} window
-              </p>
+              <div className="flex h-full flex-col space-y-6">
+                {showMainDashboard && (
+                  <>
+                    <OverviewCards analysis={analysisA} animateKey={animateKey} />
+                    <InsightPanel analysis={analysisA} />
+                    <ChartsSection analysis={analysisA} />
+                    {analysisA?.meta && (
+                      <p className="text-center text-xs text-slate-400">
+                        Analysis based on {analysisA.meta.recordCount} metric
+                        {analysisA.meta.recordCount !== 1 ? 's' : ''} ·{' '}
+                        {analysisA.meta.timeRange?.toUpperCase()} window
+                      </p>
+                    )}
+                  </>
+                )}
+              </div>
             )}
           </div>
         </div>

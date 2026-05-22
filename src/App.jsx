@@ -44,11 +44,23 @@ export default function App() {
 
   useEffect(() => {
     setHasStoredAnalysis(!!loadAnalysisFromStorage());
-    const initial = analyzeMetrics(metricsData, DEFAULT_FILTERS);
-    setAnalysisA(initial);
-    setAnimateKey((k) => k + 1);
-    saveAnalysisToStorage(initial, DEFAULT_FILTERS);
   }, []);
+
+  useEffect(() => {
+    const result = analyzeMetrics(metricsData, filtersA);
+    setAnalysisA(result);
+    if (!compareMode) {
+      saveAnalysisToStorage(result, filtersA);
+      setHasStoredAnalysis(true);
+    }
+    setAnimateKey((k) => k + 1);
+  }, [filtersA, compareMode]);
+
+  useEffect(() => {
+    if (!compareMode) return;
+    const result = analyzeMetrics(metricsData, filtersB);
+    setAnalysisB(result);
+  }, [filtersB, compareMode]);
 
   const showToast = (message) => {
     setToast(message);
@@ -116,13 +128,7 @@ export default function App() {
   };
 
   const handleToggleCompare = () => {
-    setCompareMode((prev) => {
-      if (!prev) {
-        const b = analyzeMetrics(metricsData, filtersB);
-        setAnalysisB(b);
-      }
-      return !prev;
-    });
+    setCompareMode((prev) => !prev);
   };
 
   const mainAnalysis = analysisA;

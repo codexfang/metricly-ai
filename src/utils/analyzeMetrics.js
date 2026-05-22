@@ -73,18 +73,41 @@ function computeSeriesSlope(series) {
   return ((last - first) / Math.max(first, 1)) * 100;
 }
 
-export function filterRecords(dataset, { category, metricType }) {
-  let records = [...(dataset.records ?? [])];
+function applyFilters(records, { category, metricType }) {
+  let filtered = records;
 
   if (category && category !== 'all') {
-    records = records.filter((r) => r.category === category);
+    filtered = filtered.filter((r) => r.category === category);
   }
 
   if (metricType && metricType !== 'all') {
-    records = records.filter((r) => r.metricType === metricType);
+    filtered = filtered.filter((r) => r.metricType === metricType);
   }
 
-  return records;
+  return filtered;
+}
+
+export function filterRecords(dataset, { category, metricType }) {
+  const records = [...(dataset.records ?? [])];
+  const exact = applyFilters(records, { category, metricType });
+
+  if (exact.length > 0) {
+    return { records: exact, matchMode: 'exact' };
+  }
+
+  if (category !== 'all' && metricType !== 'all') {
+    const byCategory = applyFilters(records, { category, metricType: 'all' });
+    if (byCategory.length > 0) {
+      return { records: byCategory, matchMode: 'category' };
+    }
+
+    const byMetric = applyFilters(records, { category: 'all', metricType });
+    if (byMetric.length > 0) {
+      return { records: byMetric, matchMode: 'metricType' };
+    }
+  }
+
+  return { records: exact, matchMode: 'none' };
 }
 
 export function buildCategoryComparison(records) {
@@ -239,7 +262,7 @@ export function analyzeMetrics(dataset, options = {}) {
   } = options;
 
   const months = TIME_RANGE_MONTHS[timeRange] ?? 6;
-  const records = filterRecords(dataset, { category, metricType });
+  const { records, matchMode } = filterRecords(dataset, { category, metricType });
 
   if (!records.length) {
     return {
@@ -257,9 +280,16 @@ export function analyzeMetrics(dataset, options = {}) {
         categoryBar: { labels: [], values: [] },
         riskPie: { labels: ['Low', 'Medium', 'High'], values: [0, 0, 0] },
       },
-      meta: { recordCount: 0, category, metricType, timeRange },
+      meta: { recordCount: 0, category, metricType, timeRange, matchMode: 'none' },
     };
   }
+
+  const matchNote =
+    matchMode === 'category'
+      ? `Showing all metrics for ${capitalize(category)} — no single ${metricType} series available.`
+      : matchMode === 'metricType'
+        ? `Showing ${capitalize(metricType)} metrics across categories — no match in ${capitalize(category)}.`
+        : null;
 
   const processed = records.map((record) => {
     const sliced = sliceTimeSeries(record.timeSeries, months);
@@ -297,6 +327,11 @@ export function analyzeMetrics(dataset, options = {}) {
     keyFactors,
   });
 
+  if (matchNote) {
+    insights.summary = `${matchNote} ${insights.summary}`;
+    insights.details = [matchNote, ...insights.details];
+  }
+
   const primary = processed[0];
   const mergedSeries = mergeTimeSeries(processed);
   const trendLine = {
@@ -324,6 +359,7 @@ export function analyzeMetrics(dataset, options = {}) {
       category,
       metricType,
       timeRange,
+      matchMode,
       generatedAt: new Date().toISOString(),
     },
   };

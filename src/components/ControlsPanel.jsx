@@ -148,24 +148,6 @@ export default function ControlsPanel({
           {SAMPLE_SCENARIOS[activeScenario]?.label}
         </div>
       )}
-
-      <div className="mt-auto pt-6">
-        <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
-          Sample Scenarios
-        </p>
-        <ul className="mt-2 space-y-2">
-          {Object.entries(SAMPLE_SCENARIOS).map(([key, scenario]) => (
-            <li
-              key={key}
-              className="rounded-lg border border-slate-100 bg-slate-50 px-3 py-2 text-xs text-slate-600"
-            >
-              <span className="font-medium text-slate-800">{scenario.label}</span>
-              <br />
-              {scenario.description}
-            </li>
-          ))}
-        </ul>
-      </div>
     </aside>
   );
 }

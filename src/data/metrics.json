@@ -1,0 +1,248 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-05-01",
+  "categories": ["finance", "travel", "education", "tech", "healthcare", "retail"],
+  "metricTypes": ["performance", "growth", "efficiency", "retention", "revenue"],
+  "records": [
+    {
+      "id": "fin-perf-001",
+      "category": "finance",
+      "metricType": "performance",
+      "performanceScore": 82,
+      "riskIndicator": 0.22,
+      "trendValue": 8.4,
+      "timeSeries": [
+        { "period": "2025-11", "value": 71 },
+        { "period": "2025-12", "value": 74 },
+        { "period": "2026-01", "value": 76 },
+        { "period": "2026-02", "value": 79 },
+        { "period": "2026-03", "value": 80 },
+        { "period": "2026-04", "value": 82 }
+      ]
+    },
+    {
+      "id": "fin-rev-001",
+      "category": "finance",
+      "metricType": "revenue",
+      "performanceScore": 76,
+      "riskIndicator": 0.31,
+      "trendValue": 5.2,
+      "timeSeries": [
+        { "period": "2025-11", "value": 68 },
+        { "period": "2025-12", "value": 70 },
+        { "period": "2026-01", "value": 72 },
+        { "period": "2026-02", "value": 73 },
+        { "period": "2026-03", "value": 75 },
+        { "period": "2026-04", "value": 76 }
+      ]
+    },
+    {
+      "id": "trv-gro-001",
+      "category": "travel",
+      "metricType": "growth",
+      "performanceScore": 68,
+      "riskIndicator": 0.48,
+      "trendValue": -2.1,
+      "timeSeries": [
+        { "period": "2025-11", "value": 72 },
+        { "period": "2025-12", "value": 71 },
+        { "period": "2026-01", "value": 70 },
+        { "period": "2026-02", "value": 69 },
+        { "period": "2026-03", "value": 68 },
+        { "period": "2026-04", "value": 67 }
+      ]
+    },
+    {
+      "id": "trv-perf-001",
+      "category": "travel",
+      "metricType": "performance",
+      "performanceScore": 71,
+      "riskIndicator": 0.42,
+      "trendValue": 1.8,
+      "timeSeries": [
+        { "period": "2025-11", "value": 69 },
+        { "period": "2025-12", "value": 69 },
+        { "period": "2026-01", "value": 70 },
+        { "period": "2026-02", "value": 70 },
+        { "period": "2026-03", "value": 71 },
+        { "period": "2026-04", "value": 71 }
+      ]
+    },
+    {
+      "id": "edu-eff-001",
+      "category": "education",
+      "metricType": "efficiency",
+      "performanceScore": 88,
+      "riskIndicator": 0.15,
+      "trendValue": 11.2,
+      "timeSeries": [
+        { "period": "2025-11", "value": 76 },
+        { "period": "2025-12", "value": 79 },
+        { "period": "2026-01", "value": 82 },
+        { "period": "2026-02", "value": 84 },
+        { "period": "2026-03", "value": 86 },
+        { "period": "2026-04", "value": 88 }
+      ]
+    },
+    {
+      "id": "edu-ret-001",
+      "category": "education",
+      "metricType": "retention",
+      "performanceScore": 91,
+      "riskIndicator": 0.12,
+      "trendValue": 6.5,
+      "timeSeries": [
+        { "period": "2025-11", "value": 84 },
+        { "period": "2025-12", "value": 86 },
+        { "period": "2026-01", "value": 87 },
+        { "period": "2026-02", "value": 89 },
+        { "period": "2026-03", "value": 90 },
+        { "period": "2026-04", "value": 91 }
+      ]
+    },
+    {
+      "id": "tech-gro-001",
+      "category": "tech",
+      "metricType": "growth",
+      "performanceScore": 94,
+      "riskIndicator": 0.18,
+      "trendValue": 14.7,
+      "timeSeries": [
+        { "period": "2025-11", "value": 78 },
+        { "period": "2025-12", "value": 82 },
+        { "period": "2026-01", "value": 86 },
+        { "period": "2026-02", "value": 89 },
+        { "period": "2026-03", "value": 92 },
+        { "period": "2026-04", "value": 94 }
+      ]
+    },
+    {
+      "id": "tech-perf-001",
+      "category": "tech",
+      "metricType": "performance",
+      "performanceScore": 89,
+      "riskIndicator": 0.2,
+      "trendValue": 9.1,
+      "timeSeries": [
+        { "period": "2025-11", "value": 80 },
+        { "period": "2025-12", "value": 83 },
+        { "period": "2026-01", "value": 85 },
+        { "period": "2026-02", "value": 87 },
+        { "period": "2026-03", "value": 88 },
+        { "period": "2026-04", "value": 89 }
+      ]
+    },
+    {
+      "id": "hlth-perf-001",
+      "category": "healthcare",
+      "metricType": "performance",
+      "performanceScore": 74,
+      "riskIndicator": 0.55,
+      "trendValue": -4.3,
+      "timeSeries": [
+        { "period": "2025-11", "value": 80 },
+        { "period": "2025-12", "value": 78 },
+        { "period": "2026-01", "value": 77 },
+        { "period": "2026-02", "value": 76 },
+        { "period": "2026-03", "value": 75 },
+        { "period": "2026-04", "value": 74 }
+      ]
+    },
+    {
+      "id": "hlth-eff-001",
+      "category": "healthcare",
+      "metricType": "efficiency",
+      "performanceScore": 70,
+      "riskIndicator": 0.58,
+      "trendValue": -1.2,
+      "timeSeries": [
+        { "period": "2025-11", "value": 72 },
+        { "period": "2025-12", "value": 71 },
+        { "period": "2026-01", "value": 71 },
+        { "period": "2026-02", "value": 70 },
+        { "period": "2026-03", "value": 70 },
+        { "period": "2026-04", "value": 70 }
+      ]
+    },
+    {
+      "id": "ret-rev-001",
+      "category": "retail",
+      "metricType": "revenue",
+      "performanceScore": 65,
+      "riskIndicator": 0.62,
+      "trendValue": -6.8,
+      "timeSeries": [
+        { "period": "2025-11", "value": 74 },
+        { "period": "2025-12", "value": 71 },
+        { "period": "2026-01", "value": 69 },
+        { "period": "2026-02", "value": 67 },
+        { "period": "2026-03", "value": 66 },
+        { "period": "2026-04", "value": 65 }
+      ]
+    },
+    {
+      "id": "ret-ret-001",
+      "category": "retail",
+      "metricType": "retention",
+      "performanceScore": 58,
+      "riskIndicator": 0.71,
+      "trendValue": -9.4,
+      "timeSeries": [
+        { "period": "2025-11", "value": 68 },
+        { "period": "2025-12", "value": 64 },
+        { "period": "2026-01", "value": 62 },
+        { "period": "2026-02", "value": 60 },
+        { "period": "2026-03", "value": 59 },
+        { "period": "2026-04", "value": 58 }
+      ]
+    },
+    {
+      "id": "fin-gro-001",
+      "category": "finance",
+      "metricType": "growth",
+      "performanceScore": 79,
+      "riskIndicator": 0.28,
+      "trendValue": 4.6,
+      "timeSeries": [
+        { "period": "2025-11", "value": 73 },
+        { "period": "2025-12", "value": 75 },
+        { "period": "2026-01", "value": 76 },
+        { "period": "2026-02", "value": 77 },
+        { "period": "2026-03", "value": 78 },
+        { "period": "2026-04", "value": 79 }
+      ]
+    },
+    {
+      "id": "tech-rev-001",
+      "category": "tech",
+      "metricType": "revenue",
+      "performanceScore": 92,
+      "riskIndicator": 0.16,
+      "trendValue": 12.3,
+      "timeSeries": [
+        { "period": "2025-11", "value": 79 },
+        { "period": "2025-12", "value": 83 },
+        { "period": "2026-01", "value": 86 },
+        { "period": "2026-02", "value": 89 },
+        { "period": "2026-03", "value": 91 },
+        { "period": "2026-04", "value": 92 }
+      ]
+    },
+    {
+      "id": "edu-perf-001",
+      "category": "education",
+      "metricType": "performance",
+      "performanceScore": 85,
+      "riskIndicator": 0.19,
+      "trendValue": 7.8,
+      "timeSeries": [
+        { "period": "2025-11", "value": 77 },
+        { "period": "2025-12", "value": 79 },
+        { "period": "2026-01", "value": 81 },
+        { "period": "2026-02", "value": 83 },
+        { "period": "2026-03", "value": 84 },
+        { "period": "2026-04", "value": 85 }
+      ]
+    }
+  ]
+}

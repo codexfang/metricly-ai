@@ -14,7 +14,7 @@ export default function SampleScenarioModal({ open, onClose, onSelect }) {
           Load Sample Scenario
         </h2>
         <p className="mt-1 text-sm text-slate-500">
-          Choose a predefined analytics scenario to explore Metricly AI.
+          Choose a predefined analytics scenario to explore.
         </p>
 
         <ul className="mt-4 space-y-2">

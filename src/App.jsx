@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import metricsData from './data/metrics.json';
 import Header from './components/Header';
 import ControlsPanel from './components/ControlsPanel';
@@ -11,7 +11,6 @@ import DashboardEmptyState from './components/DashboardEmptyState';
 import {
   analyzeMetrics,
   saveAnalysisToStorage,
-  loadAnalysisFromStorage,
   getScenarioFilters,
 } from './utils/analyzeMetrics';
 
@@ -39,15 +38,10 @@ export default function App() {
   const [animateKey, setAnimateKey] = useState(0);
   const [scenarioModalOpen, setScenarioModalOpen] = useState(false);
   const [activeScenario, setActiveScenario] = useState(null);
-  const [hasStoredAnalysis, setHasStoredAnalysis] = useState(false);
   const [toast, setToast] = useState(null);
 
   const activeFilters = compareSide === 'B' ? filtersB : filtersA;
   const setActiveFilters = compareSide === 'B' ? setFiltersB : setFiltersA;
-
-  useEffect(() => {
-    setHasStoredAnalysis(!!loadAnalysisFromStorage());
-  }, []);
 
   const showToast = (message) => {
     setToast(message);
@@ -81,7 +75,6 @@ export default function App() {
       const result = runAnalysis(filtersA, setAnalysisA);
       setGeneratedA(true);
       saveAnalysisToStorage(result, filtersA);
-      setHasStoredAnalysis(true);
       showToast('Insights generated successfully');
     }
     setAnimateKey((k) => k + 1);
@@ -100,20 +93,8 @@ export default function App() {
     setAnalysisA(result);
     setGeneratedA(true);
     saveAnalysisToStorage(result, newFilters);
-    setHasStoredAnalysis(true);
     setAnimateKey((k) => k + 1);
     showToast(`Loaded: ${scenarioKey.replace(/_/g, ' ')}`);
-  };
-
-  const handleRestoreStored = () => {
-    const stored = loadAnalysisFromStorage();
-    if (!stored) return;
-    setFiltersA(stored.filters ?? DEFAULT_FILTERS);
-    setAnalysisA(stored.analysis);
-    setGeneratedA(true);
-    setActiveScenario(null);
-    setAnimateKey((k) => k + 1);
-    showToast('Last analysis restored');
   };
 
   const handleToggleCompare = () => {
@@ -152,8 +133,6 @@ export default function App() {
             compareMode={compareMode}
             compareSide={compareSide}
             onCompareSideChange={setCompareSide}
-            hasStoredAnalysis={hasStoredAnalysis}
-            onRestoreStored={handleRestoreStored}
             activeScenario={activeScenario}
           />
 

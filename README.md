@@ -10,7 +10,6 @@ Metricly AI is a browser-based intelligence dashboard for trends, predictions, p
 - **Interactive charts** — trend line, category comparison, risk distribution
 - **Sample scenarios** — predefined analytics presets
 - **Compare mode** — side-by-side analysis of two filter configurations
-- **Persistent session** — last analysis saved in browser storage
 
 ## Usage
 
@@ -18,8 +17,6 @@ Metricly AI is a browser-based intelligence dashboard for trends, predictions, p
 2. Click **Generate Insights** to refresh scores, risk, trends, and charts.
 3. Use **Load Sample Data** to pick a predefined scenario.
 4. Enable **Compare Mode** to configure and analyze Dataset A vs Dataset B.
-5. **Restore Last Analysis** reloads your previous session from browser storage.
-
 ## License
 
 MIT

@@ -55,8 +55,6 @@ export default function ControlsPanel({
   compareMode,
   compareSide,
   onCompareSideChange,
-  hasStoredAnalysis,
-  onRestoreStored,
   activeScenario,
 }) {
   return (
@@ -131,15 +129,6 @@ export default function ControlsPanel({
         >
           {compareMode ? 'Exit Compare Mode' : 'Enable Compare Mode'}
         </button>
-        {hasStoredAnalysis && (
-          <button
-            type="button"
-            onClick={onRestoreStored}
-            className="w-full rounded-lg border border-dashed border-slate-300 px-4 py-2 text-xs text-slate-500 transition hover:border-brand-400 hover:text-brand-600"
-          >
-            Restore Last Analysis
-          </button>
-        )}
       </div>
 
       {activeScenario && (

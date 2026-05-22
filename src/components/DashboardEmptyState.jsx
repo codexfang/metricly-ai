@@ -28,7 +28,7 @@ export default function DashboardEmptyState({ compareMode }) {
           <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-100 text-xs font-bold text-brand-700">
             2
           </span>
-          Click <span className="font-semibold text-slate-800">Generate Insights</span>
+          Click<span className="font-semibold text-slate-800">Generate Insights</span>
         </li>
         <li className="flex items-center gap-3">
           <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-100 text-xs font-bold text-brand-700">

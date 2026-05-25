@@ -1,14 +1,6 @@
 export default function DashboardEmptyState({ compareMode }) {
   return (
     <div className="flex h-full min-h-[560px] flex-1 flex-col items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-white px-8 py-16 text-center shadow-sm">
-      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-50 text-brand-600 shadow-inner">
-        <svg className="h-8 w-8" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path
-            d="M4 18V10l4 5 4-8 4 6 4-5v10H4z"
-            fill="currentColor"
-          />
-        </svg>
-      </div>
       <h2 className="mt-6 text-xl font-semibold text-slate-900">
         Ready to analyze your metrics
       </h2>

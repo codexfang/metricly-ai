@@ -38,7 +38,7 @@ export default function OverviewCards({ analysis, animateKey }) {
         </div>
         <div className="mt-4 h-2 overflow-hidden rounded-full bg-slate-100">
           <div
-            className="h-full rounded-full bg-brand-600 animate-score-bar"
+            className="h-full rounded-full bg-gradient-to-r from-brand-500 to-brand-700 animate-score-bar"
             style={{ width: `${score}%` }}
           />
         </div>

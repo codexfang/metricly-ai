@@ -58,10 +58,10 @@ export default function ControlsPanel({
   activeScenario,
 }) {
   return (
-    <aside className="flex h-full min-h-[560px] flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/50 lg:min-h-full">
+    <aside className="flex h-full min-h-[560px] flex-col rounded-2xl border border-brand-100 bg-gradient-to-b from-brand-50 to-white p-5 shadow-lg shadow-brand-100/50 lg:min-h-full">
       <div className="mb-6">
-        <h2 className="text-sm font-semibold text-slate-900">Analysis Controls</h2>
-        <p className="mt-1 text-xs text-slate-500">
+        <h2 className="text-sm font-semibold text-brand-700">Analysis Controls</h2>
+        <p className="mt-1 text-xs text-brand-500">
           Configure filters and generate intelligence
         </p>
       </div>
@@ -107,7 +107,7 @@ export default function ControlsPanel({
         <button
           type="button"
           onClick={onGenerate}
-          className="w-full rounded-lg bg-brand-600 px-4 py-3 text-sm font-semibold text-white shadow-md shadow-brand-600/30 transition hover:bg-brand-700 hover:shadow-lg active:scale-[0.98]"
+          className="w-full rounded-lg bg-gradient-to-r from-brand-600 to-indigo-600 px-4 py-3 text-sm font-semibold text-white shadow-md shadow-brand-600/30 transition hover:from-brand-700 hover:to-indigo-700 hover:shadow-lg active:scale-[0.98]"
         >
           Generate Insights
         </button>

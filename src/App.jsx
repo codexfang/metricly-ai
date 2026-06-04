@@ -113,11 +113,11 @@ export default function App() {
   const showMainDashboard = !compareMode && generatedA && analysisA;
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-brand-50/40">
       <Header compareMode={compareMode} />
 
       {toast && (
-        <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-white shadow-xl animate-fade-up">
+        <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full bg-gradient-to-r from-brand-600 to-indigo-600 px-5 py-2.5 text-sm font-medium text-white shadow-lg shadow-brand-600/30 animate-fade-up">
           {toast}
         </div>
       )}
